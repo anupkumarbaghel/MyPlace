@@ -1,0 +1,202 @@
+﻿@{
+    ViewBag.Title = "Video Chat";
+}
+
+<style>
+    .video-container {
+        position: relative;
+        padding-bottom: 56.25%;
+        padding-top: 5px;
+        height: 0;
+        overflow: hidden;
+    }
+
+        .video-container iframe,
+        .video-container object,
+        .video-container embed {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+</style>
+
+@if(ViewBag.CallingUser!=string.Empty)
+{ 
+<div class="row well">
+    <h3>call by Mr. @ViewBag.CallingUser</h3>
+    <audio  autoplay>
+        <source src="~/Content/sound/oldbell3.mp3" type="audio/mpeg" />
+    </audio>
+</div>
+}
+<input type="hidden" value="@ViewBag.CallerId" id="usrtocall" />
+<input type="hidden" value="@ViewBag.SuccessCode" id="usrcode" />
+<div class="row well">
+    <div class="col-md-6">
+        <div class="video-container">
+
+            <video id="their-video" height="100%" autoplay></video>
+        </div>
+        Friend Video
+    </div>
+    <div class="col-md-6">
+        <div class="video-container">
+
+            <video id="my-video" muted="true" height="100%" autoplay></video>
+        </div>
+        Your Video
+    </div>
+</div>
+
+
+
+
+<!-- Steps -->
+<div class="row">
+    <h4>Exaprocess Video Chat</h4>
+
+    <!-- Get local audio/video stream -->
+    <div id="step1">
+        <p>Please click `allow` on the top of the screen so we can access your webcam and microphone for calls.</p>
+        <div id="step1-error">
+            <p>Failed to access the webcam and microphone. Make sure to run this demo on an http server and click allow when asked for permission by the browser.</p>
+            <a href="#" class="pure-button pure-button-error" id="step1-retry">Try again</a>
+        </div>
+    </div>
+
+    <!-- Make calls to others -->
+    <div id="step2">
+        <p>Your id: <span id="my-id">...</span></p>
+        <p>Share this id with others so they can call you.</p>
+        <h3>Make a call</h3>
+        <div class="form-group">
+            <input type="text" placeholder="Call user id..." id="callto-id">
+            <a href="#" class="btn btn-primary" id="make-call">Call</a>
+        </div>
+    </div>
+
+    <!-- Call in progress -->
+    <div id="step3">
+        <p>Currently in call with <span id="their-id">...</span></p>
+        <p><a href="#" class="pure-button pure-button-error" id="end-call">End call</a></p>
+    </div>
+</div>
+
+
+@section scripts{
+   
+    <script src="http://cdn.peerjs.com/0.3/peer.min.js"></script>
+    <script>
+
+    // Compatibility shim
+    navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+
+    // PeerJS object
+    var peer = new Peer({
+        key: 'df8ef8c2ptu766r', debug: 3, config: {
+            'iceServers': [
+              { url: 'stun:stun.l.google.com:19302' } // Pass in optional STUN and TURN server for maximum network compatibility
+            ]
+        }
+    });
+
+    peer.on('open', function () {
+        $('#my-id').text(peer.id);
+       
+
+       
+    });
+
+    // Receiving a call
+    peer.on('call', function (call) {
+        // Answer the call automatically (instead of prompting user) for demo purposes
+        call.answer(window.localStream);
+        step3(call);
+    });
+    peer.on('error', function (err) {
+        alert(err.message);
+        // Return to step 2 if error occurs
+        step2();
+    });
+
+    // Click handlers setup
+    $(function () {
+        $('#make-call').click(function () {
+            // Initiate a call!
+            var call = peer.call($('#callto-id').val(), window.localStream);
+
+            step3(call);
+        });
+
+        $('#end-call').click(function () {
+            window.existingCall.close();
+            step2();
+        });
+
+        // Retry if getUserMedia fails
+        $('#step1-retry').click(function () {
+            $('#step1-error').hide();
+            step1();
+        });
+
+        // Get things started
+        step1();
+    });
+
+    function step1() {
+        // Get audio/video stream
+        navigator.getUserMedia({ audio: true, video: true }, function (stream) {
+            // Set your video displays
+            $('#my-video').prop('src', URL.createObjectURL(stream));
+            window.localStream = stream;
+
+            var usrto = $('#usrtocall').val();
+            if (usrto != "") chthub.server.giveTalkIdto(usrto, peer.id);
+
+            var usrcode = $("#usrcode").val();
+            if (usrcode != "")
+            {
+                var call = peer.call(usrcode, window.localStream);
+
+                step3(call);
+            }
+
+
+            step2();
+        }, function () { $('#step1-error').show(); });
+    }
+
+    function step2() {
+        $('#step1, #step3').hide();
+        $('#step2').show();
+    }
+
+    function step3(call) {
+        // Hang up on an existing call if present
+        if (window.existingCall) {
+            window.existingCall.close();
+        }
+
+        // Wait for stream on the call, then set peer video display
+        call.on('stream', function (stream) {
+            $('#their-video').prop('src', URL.createObjectURL(stream));
+        });
+
+        // UI stuff
+        window.existingCall = call;
+        $('#their-id').text(call.peer);
+        call.on('close', step2);
+        $('#step1, #step2').hide();
+        $('#step3').show();
+    }
+
+
+    </script>
+
+}
+
+
+
+

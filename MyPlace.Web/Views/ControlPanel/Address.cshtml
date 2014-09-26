@@ -1,0 +1,85 @@
+﻿@model MyPlace.Web.Models.CpAddressVM
+
+@{
+    ViewBag.Title = "Address";
+}
+<div class="row">
+    <h3>At Last Fill Your Address and be a part of Advance India</h3>
+</div>
+<div class="row">
+    @using (Html.BeginForm("Address", "ControlPanel", new {@role="form"}))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend>Address</legend>
+            <div class="row">
+                <div class="col-sm-6">
+                    @Html.HiddenFor(Model => Model.Id)
+                  
+                  
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.AddressLine1, new { @class = "form-control", @placeholder = "Address Line 1" })
+                        @Html.ValidationMessageFor(model => model.AddressLine1)
+                    </div>
+
+                 
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.AddressLine2, new { @class = "form-control", @placeholder = "Address Line 2" })
+                        @Html.ValidationMessageFor(model => model.AddressLine2)
+                    </div>
+
+                   
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.City, new { @class = "form-control", @placeholder = "City" })
+                        @Html.ValidationMessageFor(model => model.City)
+                    </div>
+
+                  
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.State, new { @class = "form-control", @placeholder = "State" })
+                        @Html.ValidationMessageFor(model => model.State)
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                   
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.PinCode, new { @class ="form-control" , @placeholder = "PinCode" })
+                        @Html.ValidationMessageFor(model => model.PinCode)
+                    </div>
+
+                   
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.Country, new { @class = "form-control", @placeholder = "Country" })
+                        @Html.ValidationMessageFor(model => model.Country)
+                    </div>
+
+                 
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.PhoneNo, new { @class = "form-control", @placeholder = "Pnone No" })
+                        @Html.ValidationMessageFor(model => model.PhoneNo)
+                    </div>
+                   
+                      
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.LatitudeNLongitude, new { @class = "form-control", @placeholder = "long and lat like 23.168762, 75.784346" })
+                        @Html.ValidationMessageFor(model => model.LatitudeNLongitude)
+                    </div>
+                    <a href="https://www.google.co.in/maps" target="_blank">Click Here to get Longitude and Longitude(Right click on your location on map and choose "whats here?")</a>
+</div>
+            </div>
+            <div class="row" style="margin-top:20px">
+                <div class="col-md-4 center-block">
+                    <p>
+                        <input type="submit" style="width:200px" value="Save" class="btn btn-default" />
+                    </p>
+                </div>
+            </div>
+        </fieldset>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

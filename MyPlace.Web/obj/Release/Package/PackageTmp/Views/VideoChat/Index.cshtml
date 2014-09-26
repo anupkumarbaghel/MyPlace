@@ -1,0 +1,352 @@
+﻿
+@{
+    ViewBag.Title = "Video Chat";
+}
+
+<style>
+    .chat
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.chat li
+{
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    border-bottom: 1px dotted #B3A9A9;
+}
+
+.chat li.left .chat-body
+{
+    margin-left: 60px;
+}
+
+.chat li.right .chat-body
+{
+    margin-right: 60px;
+}
+
+
+.chat li .chat-body p
+{
+    margin: 0;
+    color: #777777;
+}
+
+.panel .slidedown .glyphicon, .chat .glyphicon
+{
+    margin-right: 5px;
+}
+
+.panel-body
+{
+    overflow-y: scroll;
+    height: 350px;
+}
+
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar
+{
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+}
+
+
+</style>
+
+
+
+
+
+
+<div class="row" >
+    <div class="col-sm-3"> 
+        <div class="list-group"></div>       
+     </div>
+    <div class="col-sm-9">
+
+
+
+
+
+       
+        <div class="container" >
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <span class="glyphicon glyphicon-comment"></span> &nbsp;<label class="chatto"></label>
+                            <div class="btn-group pull-right">
+                                <button type="button" class="btn btn-default btn-xs startvideochat" >
+                                    <span class="glyphicon glyphicon-facetime-video"></span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <ul class="chat msgboard">
+
+                              
+                            </ul>
+                        </div>
+                        <div class="panel-footer">
+                            <div class="input-group">
+                                <input id="btn-input" type="text" class="form-control input-sm msgbox" placeholder="Type your message here..." />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-warning btn-sm sendmessage" id="btn-chat">
+                                        Send
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+           
+      
+       
+
+
+
+
+
+
+    </div>
+</div>
+
+<input type="hidden" value="@ViewBag.MyId" id="myid"/>
+<input type="hidden" value="@ViewBag.MyName" id="myname" />
+@section scripts{
+ 
+    <script>
+        (function () {
+
+            var sendit = function () {
+                var myname = $("#myname").val();
+                var toconnid = $(".list-group-item.active").attr("data-val");
+                var content = $(".msgbox").val();
+                var cdate = new Date();
+                var ctime = cdate.getHours() + ':' + cdate.getMinutes() + ':' + cdate.getSeconds();
+                var message = {
+                    from: myname,
+                    to: toconnid,
+                    msg: content,
+                    on: ctime
+                };
+                if (toconnid) chthub.server.sendmessage(message);
+                else alert("Please Select a  user to send message");
+
+                $(".msgbox").val("");
+            };
+
+            $(".sendmessage").click(function () {
+                sendit();
+            });
+
+            $(".msgbox").onEnterKey(function () {
+                sendit();
+            });
+
+            chthub.client.rcvMessage = function (msg) {
+                var msgboard = $(".msgboard");
+                var msgtoadd = ' <li class="left clearfix"> <span class="chat-img pull-left">    <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />    </span>    <div class="chat-body clearfix">   <div class="header">    <strong class="primary-font">'+msg.from+'</strong> <small class="pull-right text-muted">      <span class="glyphicon glyphicon-time"></span>'+msg.on+'    </small>         </div>    <p>'+msg.msg+'  </p>        </div>    </li>';
+                $(msgtoadd).appendTo(msgboard);
+
+
+                $('.panel-body').animate({ scrollTop:10000 });
+            };
+
+            chthub.client.rcvSelf = function (msg) {
+                var msgboard = $(".msgboard");
+                var msgtoadd = ' <li class="right clearfix"> <span class="chat-img pull-right">    <img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar" class="img-circle" />    </span>    <div class="chat-body clearfix">   <div class="header">  <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>'+msg.on+'</small>            <strong class="pull-right primary-font">'+msg.from+'</strong>         </div>    <p>' + msg.msg + '  </p>        </div>    </li>';
+                $(msgtoadd).appendTo(msgboard);
+
+                $('.panel-body').animate({ scrollTop: 10000 });
+            };
+
+
+            $(".startvideochat").click(function () { 
+                    var connid = $(".list-group-item.active").attr("data-val");
+                    var myname = $("#myname").val();
+                    var myid = $.connection.hub.id;
+                    chthub.server.call(connid, myid,myname);
+                });
+
+
+        }());
+        
+    </script>
+    <script type="text/javascript">
+      
+        (function () {
+           
+            //hub client implementation
+            chthub.client.rcvByClient = function (usrs) {
+                var $bread = $('.list-group');
+                $bread.html("");
+                $.each(usrs, function (index, value) {
+                    $(' <a href="#" class="list-group-item" data-val="' + value.Value.ConnectionId + '" >' + value.Value.ConnectionName + ' </a>')
+                      .appendTo($bread);
+                });
+                $(".list-group-item").click(function () {
+                    $(".active").removeClass("active");
+                    $(this).addClass("active");
+                    $(".chatto").text($(".list-group-item.active").text());
+
+                   
+                });
+            };
+                       
+        }());
+      
+    </script>
+   
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<li class="left clearfix">
+    <span class="chat-img pull-left">
+        <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />
+    </span>
+    <div class="chat-body clearfix">
+        <div class="header">
+            <strong class="primary-font">Jack Sparrow</strong> <small class="pull-right text-muted">
+                <span class="glyphicon glyphicon-time"></span>12 mins ago
+            </small>
+        </div>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
+            dolor, quis ullamcorper ligula sodales.
+        </p>
+    </div>
+</li>
+
+<li class="right clearfix">
+    <span class="chat-img pull-right">
+        <img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar" class="img-circle" />
+    </span>
+    <div class="chat-body clearfix">
+        <div class="header">
+            <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>13 mins ago</small>
+            <strong class="pull-right primary-font">Bhaumik Patel</strong>
+        </div>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
+            dolor, quis ullamcorper ligula sodales.
+        </p>
+    </div>
+</li>
+<li class="left clearfix">
+    <span class="chat-img pull-left">
+        <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />
+    </span>
+    <div class="chat-body clearfix">
+        <div class="header">
+            <strong class="primary-font">Jack Sparrow</strong> <small class="pull-right text-muted">
+                <span class="glyphicon glyphicon-time"></span>14 mins ago
+            </small>
+        </div>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
+            dolor, quis ullamcorper ligula sodales.
+        </p>
+    </div>
+</li>
+<li class="right clearfix">
+    <span class="chat-img pull-right">
+        <img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar" class="img-circle" />
+    </span>
+    <div class="chat-body clearfix">
+        <div class="header">
+            <small class=" text-muted"><span class="glyphicon glyphicon-time"></span>15 mins ago</small>
+            <strong class="pull-right primary-font">Bhaumik Patel</strong>
+        </div>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare
+            dolor, quis ullamcorper ligula sodales.
+        </p>
+    </div>
+</li>*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+    <span class="glyphicon glyphicon-chevron-down"></span>
+</button>
+<ul class="dropdown-menu slidedown">
+    <li>
+        <a href="http://www.jquery2dotnet.com">
+            <span class="glyphicon glyphicon-refresh">
+            </span>Refresh
+        </a>
+    </li>
+    <li>
+        <a href="http://www.jquery2dotnet.com">
+            <span class="glyphicon glyphicon-ok-sign">
+            </span>Available
+        </a>
+    </li>
+    <li>
+        <a href="http://www.jquery2dotnet.com">
+            <span class="glyphicon glyphicon-remove">
+            </span>Busy
+        </a>
+    </li>
+    <li>
+        <a href="http://www.jquery2dotnet.com">
+            <span class="glyphicon glyphicon-time"></span>
+            Away
+        </a>
+    </li>
+    <li class="divider"></li>
+    <li>
+        <a href="http://www.jquery2dotnet.com">
+            <span class="glyphicon glyphicon-off"></span>
+            Sign Out
+        </a>
+    </li>
+</ul>*@

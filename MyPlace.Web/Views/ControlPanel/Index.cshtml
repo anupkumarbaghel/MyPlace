@@ -1,0 +1,91 @@
+﻿@model MyPlace.Web.Models.CpHomeVM
+
+@{
+    ViewBag.Title = "Create your page";
+}
+<div class="well">
+   <h3> Create your Business E-Card</h3>
+</div>
+<div class="row">
+    <div class="col-sm-6 well">
+
+        <img src="@Model.ImageUrl" class="img-thumbnail" id="image1" />
+        <p> <a href="#" id="btnFrontImage">Choose Your E-Card Pic</a></p>
+        <input type="file" name="frontImage" id="input-front-image" style="visibility:hidden" />
+
+    </div>
+
+
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true)
+        <div class="col-sm-6 well">
+            <div class="form-group">
+                @Html.TextBoxFor(model => model.Description, new { @placeholder = "Description Of Business", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+            <div class="form-group">
+                @Html.TextBoxFor(model => model.Type, new { @placeholder = "Type Of Business (Kirana Dukan)", @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Type)
+            </div>
+
+            <p>
+                <input type="submit" class="btn btn-default" value="Save" />
+            </p>
+        </div>
+    }
+</div>
+
+
+
+
+
+
+@section scripts{
+
+    <script type="text/javascript">
+        $(function () {
+           
+            initAutoFileUpload();
+            $("#input-front-image").change(function () { $("#image1").attr("src", "/Content/Gifs/wolf.gif"); });
+
+            $("#btnFrontImage").click(function () {
+                $("#input-front-image").click();
+            });
+
+            function initAutoFileUpload() {
+                'use strict';
+                $('#input-front-image').fileupload({
+                    autoUpload: true,
+                    url: '/ControlPanel/UploadImage',
+                    dataType: 'json',
+                    add: function (e, data) {
+                        var jqXHR = data.submit()
+                            .success(function (data, textStatus, jqXHR) {
+                                $("#image1").attr("src", data);
+                            })
+                            .error(function (data, textStatus, errorThrown) {
+                                if (typeof (data) != 'undefined' || typeof (textStatus) != 'undefined' || typeof (errorThrown) != 'undefined') {
+                                    alert(textStatus + errorThrown + data);
+                                }
+                            });
+                    },
+                    fail: function (event, data) {
+                        if (data.files[0].error) {
+                            alert(data.files[0].error);
+                        }
+                    }
+                });
+            }
+
+
+        });
+    </script>
+    }
+
+
+
+ 
+
+

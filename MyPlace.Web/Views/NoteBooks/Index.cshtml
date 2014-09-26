@@ -1,0 +1,176 @@
+﻿@model IEnumerable<MyPlace.Domain.NoteBook.NoteBook>
+
+@{
+    ViewBag.Title = "Note Book";
+}
+
+<div class="row" ng-app="notebook">
+    <div class="col-sm-2">
+        <div class="list-group" >
+            <a class="btn btn-default notebooknew" href="/NoteBooks/Create" style="width:100%">Note Books</a>
+
+            @foreach (var item in @ViewBag.NoteBooks)
+            {
+                if(item.Id!=@ViewBag.ActiveNoteBook)
+                {
+                <a href="#" class="list-group-item notebook @item.Id" data-val="@item.Id" title="@item.Description">@item.Title<sub class="pull-right">@item.ModifiedOn.ToString("dd MMM yy")</sub></a>}
+                else{  <a href="#" class="list-group-item active notebook @item.Id" data-val="@item.Id" title="@item.Description">@item.Title<sub class="pull-right">@item.ModifiedOn.ToString("dd MMM yy")</sub></a>}
+            }
+        </div>
+    </div>
+    <div class="col-sm-3">
+        <div class="list-group">
+            <a class="btn btn-default notenew" href="#" style="width:100%">Notes</a>
+            @foreach (var item in @ViewBag.Notes)
+            {
+                if (item.Id != @ViewBag.ActiveNote) { 
+                <a href="#" class="list-group-item note @item.Id" data-val="@item.Id">@item.Title<sub class="pull-right">@item.ModifiedOn.ToString("dd MMM yy")</sub></a>}
+                                                                                                     else
+                {
+                     <a href="#" class="list-group-item active note @item.Id" data-val="@item.Id">@item.Title <sub class="pull-right">@item.ModifiedOn.ToString("dd MMM yy")</sub></a>
+                }
+            }
+        </div>
+    </div>
+    <div class="col-sm-7">
+        <a class="btn btn-default notefinal" href="#" style="width:100%">@ViewBag.Heading</a>
+        <button id="btnPublish" class="badge pull-right">@ViewBag.Publish</button> 
+        @Html.Raw(@ViewBag.Content)
+    </div>
+</div>
+<div class="row">
+    <h4>Feel free to use right click</h4>
+</div>
+
+<ul id="contextMenu" class="dropdown-menu" role="menu">
+    <li><a tabindex="-1" href="#">New</a></li>
+    <li><a tabindex="-1" href="#">Edit</a></li>
+    <li><a tabindex="-1" href="#">Details</a></li>
+    <li><a tabindex="-1" href="#">Delete</a></li>
+</ul>
+<ul id="contextMenuNew" class="dropdown-menu" role="menu">
+    <li><a tabindex="-1" href="#">New</a></li>
+</ul>
+<ul id="NoteContextMenu" class="dropdown-menu" role="menu">
+    <li><a tabindex="-1" href="#">New</a></li>
+    <li><a tabindex="-1" href="#">Edit</a></li>
+    <li><a tabindex="-1" href="#">Details</a></li>
+    <li><a tabindex="-1" href="#">Delete</a></li>
+</ul>
+<ul id="NoteContextMenuNew" class="dropdown-menu" role="menu">
+    <li><a tabindex="-1" href="#">New</a></li>
+</ul>
+
+
+
+
+@section scripts{
+  
+    <script>
+        (function ($, window) {
+            $(".notebook").click(function () {
+                window.location = "/NoteBooks/Index" +"?NoteBook=" + $(this).attr("data-val");
+            });
+            $(".note").click(function () {
+                window.location = "/NoteBooks/Index" + "?noteBook=" + $(".notebook.active").attr("data-val") + "&note=" + $(this).attr("data-val");
+            });
+        }(jQuery, window));
+    </script>
+
+    <script>
+        (function () {
+            $(".list-group-item.notebook").contextMenu({
+                menuSelector: "#contextMenu",
+                menuSelected: function (invokedOn, selectedMenu) {
+                    if (selectedMenu.text() === "Edit")
+                        window.location = "/NoteBooks/Edit?id=" + invokedOn.attr("data-val");
+                    if (selectedMenu.text() === "Details")
+                        window.location = "/NoteBooks/Details?id=" + invokedOn.attr("data-val");
+                    if (selectedMenu.text() === "Delete")
+                        window.location = "/NoteBooks/Delete?id=" + invokedOn.attr("data-val");
+                    if (selectedMenu.text() === "New")
+                        window.location = "/NoteBooks/Create";
+
+                }
+            });
+            $(".list-group-item.note").contextMenu({
+                menuSelector: "#NoteContextMenu",
+                menuSelected: function (invokedOn, selectedMenu) {
+                    if (selectedMenu.text() === "Edit")
+                        GoToCreateNote(true, invokedOn.attr("data-val"));
+                        //window.location = "/Notes/Edit?id=" + invokedOn.attr("data-val");
+                    if (selectedMenu.text() === "Details")
+                        window.location = "/Notes/Details?id=" + invokedOn.attr("data-val");
+                    if (selectedMenu.text() === "Delete")
+                        window.location = "/Notes/Delete?id=" + invokedOn.attr("data-val");
+                    if (selectedMenu.text() === "New")
+                        GoToCreateNote();
+                }
+            });
+            $(".notebooknew").contextMenu({
+                menuSelector: "#contextMenuNew",
+                menuSelected: function (invokedOn, selectedMenu) {
+                    if (selectedMenu.text() === "New")
+                        window.location = "/NoteBooks/Create";
+
+                }
+            });
+            $(".notenew").contextMenu({
+                menuSelector: "#NoteContextMenuNew",
+                menuSelected: function (invokedOn, selectedMenu) {
+                    if (selectedMenu.text() === "New") {
+                        GoToCreateNote();
+                    }
+
+                }
+            });
+            $(".notenew").click(function () {
+                GoToCreateNote();
+            })
+            $(".notefinal").click(function (e) {
+                if ($(".note.active").attr("data-val"))  GoToCreateNote(true, $(".note.active").attr("data-val")) ;
+                else GoToCreateNote();
+            });
+            $("#btnPublish").click(function (e) {
+                if ($(".note.active").attr("data-val"))  window.location = "/PublishedNotes/PublishNote?id=" + $(".note.active").attr("data-val");
+                else alert("Please Select a Note");
+            });
+
+            var GoToCreateNote = function (edit,noteid) {
+                var notebook = $(".notebook.active");
+                var notebookid = notebook.attr("data-val")
+                if (notebookid !== undefined) {
+                    if (edit)
+                        window.location = "/Notes/Edit" + "/" + noteid ;
+                    else {
+                        window.location = "/Notes/Create" + "/" + notebookid + "?notebook=" + notebook.text();
+                    }
+
+                }
+
+                else alert("Please Select a Note Book");
+            };
+           
+           
+
+
+        }());
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

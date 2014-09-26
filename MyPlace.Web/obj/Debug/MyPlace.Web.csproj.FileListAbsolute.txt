@@ -1,0 +1,122 @@
+F:\New work\MyPlace\MyPlace.Web\bin\MyPlace.Web.dll.config
+F:\New work\MyPlace\MyPlace.Web\bin\MyPlace.Web.dll
+F:\New work\MyPlace\MyPlace.Web\bin\MyPlace.Web.pdb
+F:\New work\MyPlace\MyPlace.Web\bin\Antlr3.Runtime.dll
+F:\New work\MyPlace\MyPlace.Web\bin\EntityFramework.dll
+F:\New work\MyPlace\MyPlace.Web\bin\EntityFramework.SqlServer.dll
+F:\New work\MyPlace\MyPlace.Web\bin\Microsoft.AspNet.Identity.Core.dll
+F:\New work\MyPlace\MyPlace.Web\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+F:\New work\MyPlace\MyPlace.Web\bin\Microsoft.AspNet.Identity.Owin.dll
+F:\New work\MyPlace\MyPlace.Web\bin\Microsoft.AspNet.SignalR.Core.dll
+F:\New work\MyPlace\MyPlace.Web\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+F:\New work\MyPlace\MyPlace.Web\bin\Microsoft.Owin.dll
+F:\New work\MyPlace\MyPlace.Web\bin\Microsoft.Owin.Host.SystemWeb.dll
+F:\New work\MyPlace\MyPlace.Web\bin\Microsoft.Owin.Security.Cookies.dll
+F:\New work\MyPlace\MyPlace.Web\bin\Microsoft.Owin.Security.dll
+F:\New work\MyPlace\MyPlace.Web\bin\Microsoft.Owin.Security.Facebook.dll
+F:\New work\MyPlace\MyPlace.Web\bin\Microsoft.Owin.Security.Google.dll
+F:\New work\MyPlace\MyPlace.Web\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+F:\New work\MyPlace\MyPlace.Web\bin\Microsoft.Owin.Security.OAuth.dll
+F:\New work\MyPlace\MyPlace.Web\bin\Microsoft.Owin.Security.Twitter.dll
+F:\New work\MyPlace\MyPlace.Web\bin\Microsoft.Web.Infrastructure.dll
+F:\New work\MyPlace\MyPlace.Web\bin\MyPlace.Domain.dll
+F:\New work\MyPlace\MyPlace.Web\bin\Newtonsoft.Json.dll
+F:\New work\MyPlace\MyPlace.Web\bin\Owin.dll
+F:\New work\MyPlace\MyPlace.Web\bin\System.Web.Helpers.dll
+F:\New work\MyPlace\MyPlace.Web\bin\System.Web.Mvc.dll
+F:\New work\MyPlace\MyPlace.Web\bin\System.Web.Optimization.dll
+F:\New work\MyPlace\MyPlace.Web\bin\System.Web.Razor.dll
+F:\New work\MyPlace\MyPlace.Web\bin\System.Web.WebPages.Deployment.dll
+F:\New work\MyPlace\MyPlace.Web\bin\System.Web.WebPages.dll
+F:\New work\MyPlace\MyPlace.Web\bin\System.Web.WebPages.Razor.dll
+F:\New work\MyPlace\MyPlace.Web\bin\WebGrease.dll
+F:\New work\MyPlace\MyPlace.Web\bin\MyPlace.Domain.pdb
+F:\New work\MyPlace\MyPlace.Web\bin\Microsoft.AspNet.SignalR.Core.xml
+F:\New work\MyPlace\MyPlace.Web\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+F:\New work\MyPlace\MyPlace.Web\bin\System.Web.Helpers.xml
+F:\New work\MyPlace\MyPlace.Web\bin\System.Web.Mvc.xml
+F:\New work\MyPlace\MyPlace.Web\bin\System.Web.Optimization.xml
+F:\New work\MyPlace\MyPlace.Web\bin\System.Web.Razor.xml
+F:\New work\MyPlace\MyPlace.Web\bin\System.Web.WebPages.xml
+F:\New work\MyPlace\MyPlace.Web\bin\System.Web.WebPages.Deployment.xml
+F:\New work\MyPlace\MyPlace.Web\bin\System.Web.WebPages.Razor.xml
+F:\New work\MyPlace\MyPlace.Web\bin\Antlr3.Runtime.pdb
+F:\New work\MyPlace\MyPlace.Web\bin\Newtonsoft.Json.xml
+F:\New work\MyPlace\MyPlace.Web\bin\EntityFramework.xml
+F:\New work\MyPlace\MyPlace.Web\bin\EntityFramework.SqlServer.xml
+F:\New work\MyPlace\MyPlace.Web\bin\Microsoft.AspNet.Identity.Core.xml
+F:\New work\MyPlace\MyPlace.Web\bin\Microsoft.AspNet.Identity.Owin.xml
+F:\New work\MyPlace\MyPlace.Web\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+F:\New work\MyPlace\MyPlace.Web\bin\Microsoft.Owin.xml
+F:\New work\MyPlace\MyPlace.Web\bin\Microsoft.Owin.Host.SystemWeb.xml
+F:\New work\MyPlace\MyPlace.Web\bin\Microsoft.Owin.Security.xml
+F:\New work\MyPlace\MyPlace.Web\bin\Microsoft.Owin.Security.Facebook.xml
+F:\New work\MyPlace\MyPlace.Web\bin\Microsoft.Owin.Security.Cookies.xml
+F:\New work\MyPlace\MyPlace.Web\bin\Microsoft.Owin.Security.OAuth.xml
+F:\New work\MyPlace\MyPlace.Web\bin\Microsoft.Owin.Security.Google.xml
+F:\New work\MyPlace\MyPlace.Web\bin\Microsoft.Owin.Security.Twitter.xml
+F:\New work\MyPlace\MyPlace.Web\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+F:\New work\MyPlace\MyPlace.Web\obj\Debug\MyPlace.Web.csprojResolveAssemblyReference.cache
+F:\New work\MyPlace\MyPlace.Web\obj\Debug\MyPlace.Web.dll
+F:\New work\MyPlace\MyPlace.Web\obj\Debug\MyPlace.Web.pdb
+D:\MyPlace\MyPlace.Web\bin\MyPlace.Web.dll.config
+D:\MyPlace\MyPlace.Web\bin\MyPlace.Web.dll
+D:\MyPlace\MyPlace.Web\bin\MyPlace.Web.pdb
+D:\MyPlace\MyPlace.Web\bin\Antlr3.Runtime.dll
+D:\MyPlace\MyPlace.Web\bin\EntityFramework.dll
+D:\MyPlace\MyPlace.Web\bin\EntityFramework.SqlServer.dll
+D:\MyPlace\MyPlace.Web\bin\Microsoft.AspNet.Identity.Core.dll
+D:\MyPlace\MyPlace.Web\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\MyPlace\MyPlace.Web\bin\Microsoft.AspNet.Identity.Owin.dll
+D:\MyPlace\MyPlace.Web\bin\Microsoft.AspNet.SignalR.Core.dll
+D:\MyPlace\MyPlace.Web\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+D:\MyPlace\MyPlace.Web\bin\Microsoft.Owin.dll
+D:\MyPlace\MyPlace.Web\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\MyPlace\MyPlace.Web\bin\Microsoft.Owin.Security.Cookies.dll
+D:\MyPlace\MyPlace.Web\bin\Microsoft.Owin.Security.dll
+D:\MyPlace\MyPlace.Web\bin\Microsoft.Owin.Security.Facebook.dll
+D:\MyPlace\MyPlace.Web\bin\Microsoft.Owin.Security.Google.dll
+D:\MyPlace\MyPlace.Web\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+D:\MyPlace\MyPlace.Web\bin\Microsoft.Owin.Security.OAuth.dll
+D:\MyPlace\MyPlace.Web\bin\Microsoft.Owin.Security.Twitter.dll
+D:\MyPlace\MyPlace.Web\bin\Microsoft.Web.Infrastructure.dll
+D:\MyPlace\MyPlace.Web\bin\MyPlace.Domain.dll
+D:\MyPlace\MyPlace.Web\bin\Newtonsoft.Json.dll
+D:\MyPlace\MyPlace.Web\bin\Owin.dll
+D:\MyPlace\MyPlace.Web\bin\System.Web.Helpers.dll
+D:\MyPlace\MyPlace.Web\bin\System.Web.Mvc.dll
+D:\MyPlace\MyPlace.Web\bin\System.Web.Optimization.dll
+D:\MyPlace\MyPlace.Web\bin\System.Web.Razor.dll
+D:\MyPlace\MyPlace.Web\bin\System.Web.WebPages.Deployment.dll
+D:\MyPlace\MyPlace.Web\bin\System.Web.WebPages.dll
+D:\MyPlace\MyPlace.Web\bin\System.Web.WebPages.Razor.dll
+D:\MyPlace\MyPlace.Web\bin\WebGrease.dll
+D:\MyPlace\MyPlace.Web\bin\MyPlace.Domain.pdb
+D:\MyPlace\MyPlace.Web\bin\Microsoft.AspNet.SignalR.Core.xml
+D:\MyPlace\MyPlace.Web\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+D:\MyPlace\MyPlace.Web\bin\System.Web.Helpers.xml
+D:\MyPlace\MyPlace.Web\bin\System.Web.Mvc.xml
+D:\MyPlace\MyPlace.Web\bin\System.Web.Optimization.xml
+D:\MyPlace\MyPlace.Web\bin\System.Web.Razor.xml
+D:\MyPlace\MyPlace.Web\bin\System.Web.WebPages.xml
+D:\MyPlace\MyPlace.Web\bin\System.Web.WebPages.Deployment.xml
+D:\MyPlace\MyPlace.Web\bin\System.Web.WebPages.Razor.xml
+D:\MyPlace\MyPlace.Web\bin\Antlr3.Runtime.pdb
+D:\MyPlace\MyPlace.Web\bin\Newtonsoft.Json.xml
+D:\MyPlace\MyPlace.Web\bin\EntityFramework.xml
+D:\MyPlace\MyPlace.Web\bin\EntityFramework.SqlServer.xml
+D:\MyPlace\MyPlace.Web\bin\Microsoft.AspNet.Identity.Core.xml
+D:\MyPlace\MyPlace.Web\bin\Microsoft.AspNet.Identity.Owin.xml
+D:\MyPlace\MyPlace.Web\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\MyPlace\MyPlace.Web\bin\Microsoft.Owin.xml
+D:\MyPlace\MyPlace.Web\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\MyPlace\MyPlace.Web\bin\Microsoft.Owin.Security.xml
+D:\MyPlace\MyPlace.Web\bin\Microsoft.Owin.Security.Facebook.xml
+D:\MyPlace\MyPlace.Web\bin\Microsoft.Owin.Security.Cookies.xml
+D:\MyPlace\MyPlace.Web\bin\Microsoft.Owin.Security.OAuth.xml
+D:\MyPlace\MyPlace.Web\bin\Microsoft.Owin.Security.Google.xml
+D:\MyPlace\MyPlace.Web\bin\Microsoft.Owin.Security.Twitter.xml
+D:\MyPlace\MyPlace.Web\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+D:\MyPlace\MyPlace.Web\obj\Debug\MyPlace.Web.csprojResolveAssemblyReference.cache
+D:\MyPlace\MyPlace.Web\obj\Debug\MyPlace.Web.dll
+D:\MyPlace\MyPlace.Web\obj\Debug\MyPlace.Web.pdb

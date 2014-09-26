@@ -1,0 +1,247 @@
+﻿@model ProductDetail
+@{
+    ViewBag.Title = "ProductDetail";
+}
+
+<div class="row">
+    <div class="col-sm-6">
+        <div class="well">
+            <img src="@Model.ImageUrl1" id="image1" />
+            <a href="#" class="btn btn-primary" id="btnImage1">Upload Detail Image 1</a>
+            <input type="file" name="HmDescMainImage" id="inputImage1" style="visibility:hidden" />
+        </div>
+    </div>
+    <div class="col-sm-6">
+        @using (Html.BeginForm())
+        {
+            <div class="well">
+                @Html.TextAreaFor(model => model.Specification, new { @placeholder = "Fill Product Specification", @style = "height:100%;width:100%" })
+                @Html.TextBoxFor(model => model.VideoUrl1, new { @class = "input-sm", @placeholder = "Go to YouTube.com > YourVideo > Share > Embed" })
+
+                <button type="submit" class="btn btn-primary pull-right">Save</button>
+            </div>
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-6">
+        <div class="well">
+            <img src="@Model.ImageUrl2" id="image2" />
+            <a href="#" class="btn btn-primary" id="btnImage2">Upload Detail Image 2</a>
+            <input type="file" name="HmDescMainImage" id="inputImage2" style="visibility:hidden" />
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="well">
+            <img src="@Model.ImageUrl3" id="image3" />
+            <a href="#" class="btn btn-primary" id="btnImage3">Upload Detail Image 3</a>
+            <input type="file" name="HmDescMainImage" id="inputImage3" style="visibility:hidden" />
+        </div>
+    </div>
+</div>
+
+<div class="row">
+   
+        <div class="well">
+            <img src="@Model.ImageUrl4" id="image4" />
+            <a href="#" class="btn btn-primary" id="btnImage4">Upload Detail Image 4</a>
+            <input type="file" name="HmDescMainImage" id="inputImage4" style="visibility:hidden" />
+       
+</div>
+
+
+
+
+@section scripts{
+<script type="text/javascript">
+        $(function () {
+            var i = "1";
+            var inputImagei = "inputImage" + i;
+            var imagei = "image" + i;
+            var btnImagei = "btnImage" + i;
+            var UploadCollImagei = "UploadCollImage" + i;
+            initAutoFileUpload();
+
+
+            $("#" + inputImagei).change(function () { $("#" + imagei).attr("src", "/Content/Gifs/wolf.gif"); });
+
+            $("#" + btnImagei).click(function () {
+                $("#" + inputImagei).click();
+                return false;
+            });
+
+            function initAutoFileUpload() {
+                'use strict';
+
+                $('#' + inputImagei).fileupload({
+                    autoUpload: true,
+                    url: '/Products/' + UploadCollImagei,
+                    dataType: 'json',
+                    add: function (e, data) {
+                        var jqXHR = data.submit()
+                            .success(function (data, textStatus, jqXHR) {
+
+                                $("#" + imagei).attr("src", data);
+                            })
+                            .error(function (data, textStatus, errorThrown) {
+                                if (typeof (data) != 'undefined' || typeof (textStatus) != 'undefined' || typeof (errorThrown) != 'undefined') {
+                                    alert(textStatus + errorThrown + data);
+                                }
+                            });
+                    },
+                    fail: function (event, data) {
+                        if (data.files[0].error) {
+                            alert(data.files[0].error);
+                        }
+                    }
+                });
+            }
+
+
+        });
+</script>
+
+<script type="text/javascript">
+        $(function () {
+            var i = "2";
+            var inputImagei = "inputImage" + i;
+            var imagei = "image" + i;
+            var btnImagei = "btnImage" + i;
+            var UploadCollImagei = "UploadCollImage" + i;
+            initAutoFileUpload();
+
+
+            $("#" + inputImagei).change(function () { $("#" + imagei).attr("src", "/Content/Gifs/wolf.gif"); });
+
+            $("#" + btnImagei).click(function () {
+                $("#" + inputImagei).click();
+                return false;
+            });
+
+            function initAutoFileUpload() {
+                'use strict';
+
+                $('#' + inputImagei).fileupload({
+                    autoUpload: true,
+                    url: '/Products/' + UploadCollImagei,
+                    dataType: 'json',
+                    add: function (e, data) {
+                        var jqXHR = data.submit()
+                            .success(function (data, textStatus, jqXHR) {
+
+                                $("#" + imagei).attr("src", data);
+                            })
+                            .error(function (data, textStatus, errorThrown) {
+                                if (typeof (data) != 'undefined' || typeof (textStatus) != 'undefined' || typeof (errorThrown) != 'undefined') {
+                                    alert(textStatus + errorThrown + data);
+                                }
+                            });
+                    },
+                    fail: function (event, data) {
+                        if (data.files[0].error) {
+                            alert(data.files[0].error);
+                        }
+                    }
+                });
+            }
+
+
+        });
+</script>
+
+<script type="text/javascript">
+        $(function () {
+            var i = "3";
+            var inputImagei = "inputImage" + i;
+            var imagei = "image" + i;
+            var btnImagei = "btnImage" + i;
+            var UploadCollImagei = "UploadCollImage" + i;
+            initAutoFileUpload();
+
+
+            $("#" + inputImagei).change(function () { $("#" + imagei).attr("src", "/Content/Gifs/wolf.gif"); });
+
+            $("#" + btnImagei).click(function () {
+                $("#" + inputImagei).click();
+                return false;
+            });
+
+            function initAutoFileUpload() {
+                'use strict';
+
+                $('#' + inputImagei).fileupload({
+                    autoUpload: true,
+                    url: '/Products/' + UploadCollImagei,
+                    dataType: 'json',
+                    add: function (e, data) {
+                        var jqXHR = data.submit()
+                            .success(function (data, textStatus, jqXHR) {
+
+                                $("#" + imagei).attr("src", data);
+                            })
+                            .error(function (data, textStatus, errorThrown) {
+                                if (typeof (data) != 'undefined' || typeof (textStatus) != 'undefined' || typeof (errorThrown) != 'undefined') {
+                                    alert(textStatus + errorThrown + data);
+                                }
+                            });
+                    },
+                    fail: function (event, data) {
+                        if (data.files[0].error) {
+                            alert(data.files[0].error);
+                        }
+                    }
+                });
+            }
+
+
+        });
+</script>
+
+<script type="text/javascript">
+        $(function () {
+            var i = "4";
+            var inputImagei = "inputImage" + i;
+            var imagei = "image" + i;
+            var btnImagei = "btnImage" + i;
+            var UploadCollImagei = "UploadCollImage" + i;
+            initAutoFileUpload();
+
+
+            $("#" + inputImagei).change(function () { $("#" + imagei).attr("src", "/Content/Gifs/wolf.gif"); });
+
+            $("#" + btnImagei).click(function () {
+                $("#" + inputImagei).click();
+                return false;
+            });
+
+            function initAutoFileUpload() {
+                'use strict';
+
+                $('#' + inputImagei).fileupload({
+                    autoUpload: true,
+                    url: '/Products/' + UploadCollImagei,
+                    dataType: 'json',
+                    add: function (e, data) {
+                        var jqXHR = data.submit()
+                            .success(function (data, textStatus, jqXHR) {
+
+                                $("#" + imagei).attr("src", data);
+                            })
+                            .error(function (data, textStatus, errorThrown) {
+                                if (typeof (data) != 'undefined' || typeof (textStatus) != 'undefined' || typeof (errorThrown) != 'undefined') {
+                                    alert(textStatus + errorThrown + data);
+                                }
+                            });
+                    },
+                    fail: function (event, data) {
+                        if (data.files[0].error) {
+                            alert(data.files[0].error);
+                        }
+                    }
+                });
+            }
+
+
+        });
+</script>
+    }

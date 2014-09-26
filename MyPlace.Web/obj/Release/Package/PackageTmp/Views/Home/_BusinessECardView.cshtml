@@ -1,0 +1,47 @@
+﻿@model IEnumerable<MyPlace.Web.Models.HomeViewModel>
+
+@foreach (var item in Model)
+{
+    <div class="row well" >
+        @foreach (var subitem in item.homes)
+        {
+            <div class="col-md-3">
+                <div class="thumbnail" >
+                    card No : @subitem.Id
+                    <a href="@Url.Action("Description", new { id=@subitem.Id})">
+                        <img src="@subitem.ImageUrl" alt="Oh oh">
+                    </a>
+                    <div class="caption">
+                        <h4 class="text-primary">@subitem.Description</h4>
+                        <p> Type : @subitem.Type </p>
+                        <p> Views : @subitem.NoViewes </p>
+                        <p>@((DateTime.Now - subitem.CreatedOn).Days) Days Ago</p>
+                    </div>
+                    @if(@ViewBag.UserReference==@subitem.UserID&&@subitem.State!="N")
+                    {
+                        <form method="post" action="/Home/CardShowHide">
+                            <input type="hidden" name="cardid" value="@subitem.Id" />
+                            <h4 class="pull-right">Its Your Card</h4>
+                            @if (@subitem.State != "o" || string.IsNullOrEmpty(@subitem.State))
+                            {
+                                <input type="hidden" name="cardshowhide" value="show" />
+                                <input type="submit" class="btn btn-danger" value="Show" />
+                            }
+                            else
+                            {
+                                <input type="hidden" name="cardshowhide" value="hide" />
+                                <input type="submit" class="btn btn-success" value="Hide" />
+                            }
+
+                        </form>
+                    }
+                    @if (@subitem.State == "N")
+                    {
+                        <h4>Wait for approval by Admin</h4> 
+                    }
+                </div>
+
+            </div>
+        }
+    </div>
+}

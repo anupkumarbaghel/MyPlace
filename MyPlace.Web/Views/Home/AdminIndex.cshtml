@@ -1,0 +1,66 @@
+﻿@model IEnumerable<MyPlace.Web.Models.HomeViewModel>
+@{
+    ViewBag.Title = "Admin";
+}
+
+<div class="row">
+    <div class="well">
+        <form method="get">
+            <input type="search" name="cardNo" placeholder="Card No" class="input-sm" />
+            <input type="search" name="city" placeholder="City" class="input-sm" />
+            <input type="search" name="product" placeholder="Product" class="input-sm" />
+            <input type="search" name="Type" placeholder="Type" class="input-sm" />
+            <input type="search" name="Title" placeholder="Title" class="input-sm" />
+            <input type="search" name="state" placeholder="state" class="input-sm" />
+            <span class="text-info">@ViewBag.CountResultFound</span>
+            <input type="submit" value="Search" class="btn btn-sm btn-default" />
+        </form>
+    </div>
+</div>
+
+@foreach (var item in Model)
+{
+    <div class="row well">
+        @foreach (var subitem in item.homes)
+        {
+            <div class="col-md-3">
+                <div class="thumbnail">
+                    card No : @subitem.Id
+                    <a href="@Url.Action("Description", new { id=@subitem.Id})">
+                        <img src="@subitem.ImageUrl" alt="Oh oh">
+                    </a>
+                    <div class="caption">
+                        <h3 class="text-primary">@subitem.Description</h3>
+                        <p> Type : @subitem.Type </p>
+                        <p> Views : @subitem.NoViewes </p>
+                        <p>@((DateTime.Now - subitem.CreatedOn).Days) Days Ago</p>
+                    </div>
+                   
+                    <form method="post" action="/Home/CardShowHide">
+                        <input type="hidden" name="cardid" value="@subitem.Id" />
+                        @if (@subitem.State != "o" || string.IsNullOrEmpty(@subitem.State))
+                        {
+                            <input type="hidden" name="cardshowhide" value="show" />
+                             <input type="submit" class="btn btn-danger" value="Approve" />
+                        }
+                        else
+                        {
+                            <input type="hidden" name="cardshowhide" value="hide" />
+                             <input type="submit" class="btn btn-success" value="Cancel" />
+                        }
+                        
+                        @if (@subitem.State == "N")
+                        { <span class="badge pull-right">N</span> }
+                    </form>
+
+
+
+                </div>
+
+            </div>
+        }
+    </div>
+}
+
+
+

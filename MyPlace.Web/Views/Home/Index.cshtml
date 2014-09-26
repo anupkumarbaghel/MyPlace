@@ -1,0 +1,32 @@
+﻿@model IEnumerable<MyPlace.Web.Models.HomeViewModel>
+@{
+    ViewBag.MetaDescription="keep your business reference in the form of card.";
+    ViewBag.Title = "Digital Age";
+}
+
+<div class="row">
+    <div class="well">
+        <form method="get">
+            <input type="search" name="cardNo" placeholder="Card No" class="input-sm" />
+            <input type="search" name="city" placeholder="City" class="input-sm" />
+            <input type="search" name="product" placeholder="Product" class="input-sm" />
+            <input type="search" name="Type" placeholder="Type" class="input-sm" />
+            <input type="search" name="Title" placeholder="Title" class="input-sm" />
+            <input type="submit" value="Search" class="btn btn-sm btn-default" />
+            <span class="text-info">@ViewBag.CountResultFound</span>
+            
+        </form>
+    </div>
+</div>
+<div style="position:fixed;left:0;top:auto">
+    <a href="https://www.facebook.com/ujjainbusiness" rel="publisher">
+        <img src="~/Content/img/facebook_32.png" />
+    </a>
+    <a href="https://plus.google.com/117789713153369181077" rel="publisher">
+        <img src="~/Content/img/googleplus_32.png" />
+    </a>
+</div>
+@Html.Partial("_BusinessECardView", Model)
+
+
+

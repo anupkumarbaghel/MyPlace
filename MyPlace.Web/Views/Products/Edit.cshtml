@@ -1,0 +1,107 @@
+﻿@model MyPlace.Domain.Shoping.Product
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+     @Html.HiddenFor(model => model.Id)
+    <hr />
+    <div class="row well">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-5">
+                    <fieldset>
+                        <legend>Image</legend>
+                        <img src="@Model.ImageUrl" class="img-thumbnail" id="image1" />
+                        <p> <a href="#" class="btnFrontImage btn btn-primary">Choose Your Product Image</a></p>
+                        <input type="file" name="frontImage" id="input-front-image" style="visibility:hidden" />
+                    </fieldset>
+                </div>
+                <div class="col-sm-7">
+                    <fieldset>
+                        <legend>Select at least one category</legend>
+                      
+                        @foreach (ProductCategory pc in ViewBag.ProductCategory)
+                        {
+                            <div class="checkbox">
+                                <input type="checkbox" checked="@pc.Checked" name="CategoryRef" value="@pc.Id" />@pc.Title
+                            </div>
+                        }
+                    </fieldset>
+                </div>
+            </div>
+            
+        </div>
+        <div class="col-sm-6">
+            <fieldset>
+                <legend>Values</legend>
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", @Placeholder = "Fill Product Title" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @placeholder = "Fill Product Description" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+
+                Price : @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", @placeholder = "Price of your product" } })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+
+                Order : @Html.EditorFor(model => model.order, new { htmlAttributes = new { @class = "form-control", @placeholder = "higher order first" } })
+                @Html.ValidationMessageFor(model => model.order, "", new { @class = "text-danger" })
+
+                <input type="submit" value="Save" class="btn btn-default" />
+            </fieldset>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+@section scripts{
+
+    <script type="text/javascript">
+        $(function () {
+
+            initAutoFileUpload();
+            $("#input-front-image").change(function () { $("#image1").attr("src", "/Content/Gifs/wolf.gif"); });
+
+            $(".btnFrontImage").click(function () {
+                $("#input-front-image").click();
+            });
+
+            function initAutoFileUpload() {
+                'use strict';
+                $('#input-front-image').fileupload({
+                    autoUpload: true,
+                    url: '/Products/UploadEditProductImage',
+                    dataType: 'json',
+                    add: function (e, data) {
+                        var jqXHR = data.submit()
+                            .success(function (data, textStatus, jqXHR) {
+                                $("#image1").attr("src", data);
+                            })
+                            .error(function (data, textStatus, errorThrown) {
+                                if (typeof (data) != 'undefined' || typeof (textStatus) != 'undefined' || typeof (errorThrown) != 'undefined') {
+                                    alert(textStatus + errorThrown + data);
+                                }
+                            });
+                    },
+                    fail: function (event, data) {
+                        if (data.files[0].error) {
+                            alert(data.files[0].error);
+                        }
+                    }
+                });
+            }
+
+
+        });
+    </script>
+}

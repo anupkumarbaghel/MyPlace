@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="language" content="english"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="@ViewBag.MetaDescription . Promote and Introduce your business with e-commerese feature">
+    <meta name="Keywords" content="business , e commerce, promotion, online, new to e commerce, promote your  business">
+    <title>@ViewBag.Title - BusinessECard</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    <script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-52929167-1', 'auto');
+    ga('send', 'pageview');
+
+    </script>
+
+</head>
+<body>
+
+    <audio id="callsound">
+        <source src="~/Content/sound/oldbell3.mp3" type="audio/mpeg" />
+    </audio>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Business E-Card", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li >@Html.ActionLink("My Card", "Index", "ControlPanel")</li>
+                    <li >@Html.ActionLink("Published Notes", "Index", "PublishedNotes")</li>
+                    <li >@Html.ActionLink("My Note Book", "Index", "NoteBooks")</li>
+                    <li><a href="https://rtccopy.com">Share File</a></li>  
+                    <li >@Html.ActionLink("Chat", "Index", "VideoChat")</li> 
+                </ul>
+                  
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Business E-Card All Right Reserved</p>
+        </footer>
+    </div>
+
+    <div style="position:fixed;bottom:0px;right:0px">
+        
+        <div class="list-group homeonlineuser">
+            <a href="#" class="list-group-item active">
+               Online Users
+            </a>
+            <div class="homeonlineuserdiv">
+
+            </div>
+        </div>
+         
+    </div>
+        @Scripts.Render("~/bundles/bootstrap")
+        @*<script src="~/Scripts/jquery.unveil.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.0.2.js"></script>*@
+        <script src="~/SignalR/Hubs"></script>
+        <script src="~/Scripts/myjavascript.js"></script>
+         @RenderSection("scripts", required: false)
+</body>
+</html>

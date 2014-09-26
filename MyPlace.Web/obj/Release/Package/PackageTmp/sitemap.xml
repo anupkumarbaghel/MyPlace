@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<url>
+  <loc>http://businessecard.in/</loc>
+  <changefreq>always</changefreq>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>http://businessecard.in/Account/Login?ReturnUrl=%2FControlPanel</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://businessecard.in/PublishedNotes</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://businessecard.in/Account/Login?ReturnUrl=%2FNoteBooks</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://businessecard.in/Account/Login?ReturnUrl=%2FVideoChat</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://businessecard.in/Account/Register</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://businessecard.in/Account/Login</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://businessecard.in/Home/Description/1</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://businessecard.in/Home/Description/9</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://businessecard.in/Home/Description/7</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://businessecard.in/Home/Description/6</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://businessecard.in/Home/Description/3</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://businessecard.in/Home/Description/4</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://businessecard.in/Home/Description/5</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://businessecard.in/Home/Description/8</loc>
+  <changefreq>always</changefreq>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>http://businessecard.in/Home/OnlineShoaping/1</loc>
+  <changefreq>always</changefreq>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>http://businessecard.in/Home/OnlineShoaping/1?val=1</loc>
+  <changefreq>always</changefreq>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>http://businessecard.in/Home/OnlineShoaping/1?val=2</loc>
+  <changefreq>always</changefreq>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>http://businessecard.in/Home/ProductDetail/2</loc>
+  <changefreq>always</changefreq>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>http://businessecard.in/Home/ProductDetail/6</loc>
+  <changefreq>always</changefreq>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>http://businessecard.in/Home/ProductDetail/5</loc>
+  <changefreq>always</changefreq>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>http://businessecard.in/Home/ProductDetail/7</loc>
+  <changefreq>always</changefreq>
+  <priority>0.41</priority>
+</url>
+</urlset>

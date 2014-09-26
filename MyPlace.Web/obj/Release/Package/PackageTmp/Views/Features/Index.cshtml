@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<div class="row">
+    <div class="jumbotron">
+        <h2>Keep you updated with latest features.</h2>
+    </div>
+</div>
+<div class="row">
+    <div class="well">
+        @Html.ActionLink("Keep your address updated", "Address", "ControlPanel", null, new {@class="btn btn-primary" })
+    </div>
+</div>
+
+<div class="row">
+    <div class="well">
+
+        @if (@ViewBag.shoping)
+        {
+            <div class="btn-group-vertical">
+                @Html.ActionLink("Create your product Categories", "Index", "ProductCategories", null, new { @class = "btn btn-primary" })<br />
+                @if(@ViewBag.showproduct)
+                {
+                @Html.ActionLink("Create your products", "Index", "Products", null, new { @class = "btn btn-primary" })
+                }
+            </div>
+    
+
+        }
+        else
+        {
+                using (@Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <input type="hidden" value="shoping" name="feature" />
+                    <h2>Increase Your Business By Start Your Online Store</h2>
+                    <a class="btn btn-primary" data-toggle="confirmation"
+                       data-btnoklabel="Go" data-btnokclass="btn btn-sm btn-primary"
+                       data-btncancellabel="No">Start</a>
+                     <button type="submit" hidden id="btnSubmit" ></button>
+   
+
+                }
+
+        }
+
+    </div>
+</div>
+
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('[data-toggle="confirmation"]').confirmation({
+                onConfirm: function () { $("#btnSubmit").click();},
+                onCancel: function () {  }
+            });
+        });
+    </script>
+}

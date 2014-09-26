@@ -1,0 +1,69 @@
+﻿@model IEnumerable<MyPlace.Web.Models.ProductVM>
+
+@foreach (var item in Model)
+{
+    <div class="row">
+        <div class="col-md-6">
+
+            <div class="row">
+                @foreach (var subitem in item.p1s)
+                {
+        
+                    <div class="col-xs-6 well">
+                           Product Id : @subitem.Id
+                           @if (subitem.IsDetail)
+                           {
+                            <a href="/Home/ProductDetail/@subitem.Id">
+                                <img data-src="@subitem.ImageUrl" style="border-bottom:solid 3px #0094ff;border-right:solid 3px #0094ff" src="~/Content/Gifs/Wolf.gif" />
+                            </a>
+                           }
+                           else
+                           {
+                                 <img data-src="@subitem.ImageUrl"  src="~/Content/Gifs/Wolf.gif" />
+                           }
+                          
+                      
+                        <div class="text-primary">
+                            @subitem.Title
+                        </div>
+                        <div class="text-info">
+                            Rs @subitem.Price   
+                        </div>
+                    </div>
+                }
+            </div>
+
+        </div>
+
+        <div class="col-md-6">
+
+            <div class="row">
+                @foreach (var subitem in item.p2s)
+                {
+                    
+                    <div class="col-xs-6 well">
+                        Product Id : @subitem.Id
+                        @if (subitem.IsDetail)
+                        {
+                            <a href="/Home/ProductDetail/@subitem.Id">
+                                <img data-src="@subitem.ImageUrl" style="border-bottom:solid 3px #0094ff;border-right:solid 3px #0094ff" src="~/Content/Gifs/Wolf.gif" />
+                            </a>
+                        }
+                        else
+                        {
+                            <img data-src="@subitem.ImageUrl" src="~/Content/Gifs/Wolf.gif" />
+                        }
+                        <div class="text-primary">
+                            @subitem.Title
+                        </div>
+                        <div class="text-info">
+                            Rs @subitem.Price
+                        </div>
+                    </div>
+
+                }
+            </div>
+
+        </div>
+    </div>
+}

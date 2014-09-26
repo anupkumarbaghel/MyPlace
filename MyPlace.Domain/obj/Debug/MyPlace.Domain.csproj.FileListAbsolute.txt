@@ -1,0 +1,15 @@
+c:\users\zac\documents\visual studio 2013\Projects\MyPlaceSolution\MyPlace.Domain\bin\Debug\MyPlace.Domain.dll
+c:\users\zac\documents\visual studio 2013\Projects\MyPlaceSolution\MyPlace.Domain\bin\Debug\MyPlace.Domain.pdb
+c:\users\zac\documents\visual studio 2013\Projects\MyPlaceSolution\MyPlace.Domain\obj\Debug\MyPlace.Domain.csprojResolveAssemblyReference.cache
+c:\users\zac\documents\visual studio 2013\Projects\MyPlaceSolution\MyPlace.Domain\obj\Debug\MyPlace.Domain.dll
+c:\users\zac\documents\visual studio 2013\Projects\MyPlaceSolution\MyPlace.Domain\obj\Debug\MyPlace.Domain.pdb
+F:\New work\MyPlace\MyPlace.Domain\bin\Debug\MyPlace.Domain.dll
+F:\New work\MyPlace\MyPlace.Domain\bin\Debug\MyPlace.Domain.pdb
+F:\New work\MyPlace\MyPlace.Domain\obj\Debug\MyPlace.Domain.dll
+F:\New work\MyPlace\MyPlace.Domain\obj\Debug\MyPlace.Domain.pdb
+F:\New work\MyPlace\MyPlace.Domain\obj\Debug\MyPlace.Domain.csprojResolveAssemblyReference.cache
+D:\MyPlace\MyPlace.Domain\bin\Debug\MyPlace.Domain.dll
+D:\MyPlace\MyPlace.Domain\bin\Debug\MyPlace.Domain.pdb
+D:\MyPlace\MyPlace.Domain\obj\Debug\MyPlace.Domain.csprojResolveAssemblyReference.cache
+D:\MyPlace\MyPlace.Domain\obj\Debug\MyPlace.Domain.dll
+D:\MyPlace\MyPlace.Domain\obj\Debug\MyPlace.Domain.pdb

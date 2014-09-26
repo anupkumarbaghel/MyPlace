@@ -1,0 +1,80 @@
+﻿@model IEnumerable<MyPlace.Domain.Shoping.Product>
+
+@{
+    ViewBag.Title = "Index";
+}
+@Html.Action("Create")
+<div class="row well">
+    @foreach (Product item in Model)
+    {
+       
+        <div class="col-sm-3">
+            Product id : @item.Id
+            <img src="@item.ImageUrl" class="img-thumbnail" id="productImage" />
+            <div class="text-primary">
+                @item.Title
+            </div>
+            <div class="text-info">
+                Rs  @item.Price
+            </div>
+           Higher Order First : @item.order
+            <div class="btn-group">
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
+                @if(@item.IsDetail)
+                {
+                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-success" })
+                }
+                else
+                { 
+                @Html.ActionLink("Details", "Details", new { id = item.Id }, new {@class="btn btn-primary" })
+                }
+            </div>
+        </div>
+    }
+</div>
+
+@Html.ActionLink("Finish", "Index", "Features", null, new { @class = "btn btn-primary pull-right" })
+
+
+@section scripts{
+
+    <script type="text/javascript">
+        $(function () {
+
+            initAutoFileUpload();
+            $("#input-front-image").change(function () { $("#image1").attr("src", "/Content/Gifs/wolf.gif"); });
+
+            $(".btnFrontImage").click(function () {
+                $("#input-front-image").click();
+            });
+
+            function initAutoFileUpload() {
+                'use strict';
+                $('#input-front-image').fileupload({
+                    autoUpload: true,
+                    url: '/Products/UploadProductImage',
+                    dataType: 'json',
+                    add: function (e, data) {
+                        var jqXHR = data.submit()
+                            .success(function (data, textStatus, jqXHR) {
+                                $("#image1").attr("src", data);
+                            })
+                            .error(function (data, textStatus, errorThrown) {
+                                if (typeof (data) != 'undefined' || typeof (textStatus) != 'undefined' || typeof (errorThrown) != 'undefined') {
+                                    alert(textStatus + errorThrown + data);
+                                }
+                            });
+                    },
+                    fail: function (event, data) {
+                        if (data.files[0].error) {
+                            alert(data.files[0].error);
+                        }
+                    }
+                });
+            }
+
+
+        });
+    </script>
+}
