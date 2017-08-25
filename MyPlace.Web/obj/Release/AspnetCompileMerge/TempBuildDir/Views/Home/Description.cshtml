@@ -1,0 +1,155 @@
+﻿@model MyPlace.Domain.HomeDescription
+@{
+    ViewBag.MetaDescription = "Here Description of your business ";
+    ViewBag.Title = "Description";
+}
+@Model.Home.Description
+<style>
+    #map_canvas {
+        width: 100%;
+        height: 400px;
+    }
+    .video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px; height: 0; overflow: hidden;
+}
+ 
+.video-container iframe,
+.video-container object,
+.video-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+</style>
+ @if(ViewBag.Shoping)
+{
+<div class="jumbotron">
+    <div class="lead text-info">@Model.ShopingNotification</div>
+   
+    <a href="@Url.Action("OnlineShoaping", new { id = @Model.Id })" class="btn btn-primary pull-right">Online Store</a>
+</div>
+}
+    <div id="divHeader" class="well">
+           <h3 class="text-primary">@Model.MainHeader</h3>
+        <div class="row">
+            <div class="col-sm-6">
+                <img class="img-responsive img-thumbnail" src="@Model.HeaderImageUrl" alt="Exaprocess" />
+            </div>
+            <div class="col-sm-6">
+                <img class="img-responsive img-thumbnail" src="@Model.HeaderImageUrl1" alt="Exaprocess" />
+            </div>
+        </div>       
+    </div>
+   
+
+   <div class="well text-primary">
+        <h4>@Model.NotificationHeader</h4>
+        <span class="lead">@Html.Raw(Model.NotificationHeaderSub)</span>
+    </div>
+
+<div class="row well" id="forVideo">
+    <div class="col-md-6">
+        <div class="video-container" id="forVideo1">
+         @Html.Raw(@Model.VideoUrl1)
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="video-container">
+            @Html.Raw(@Model.VideoUrl2)
+        </div>
+    </div>
+</div>
+
+
+    @foreach (var item in @Model.HmDescImageConCollection)
+    {
+        if (!string.IsNullOrEmpty(@item.ImageUrl))
+        {
+            <div class="row well">
+                <div class="col-md-6">
+                    <img class="img-responsive img-rounded" src="@item.ImageUrl" />
+                </div>
+                <div class="col-md-6 text-justify well">
+                    <h5>@item.Content</h5>
+                </div>
+            </div>
+        }
+    }
+
+
+
+    
+    <div class="row">
+       
+            <fieldset>
+                <legend>Address</legend>
+                <div class=" text-primary lead">
+                    @ViewBag.Address.AddressLine1
+                    @ViewBag.Address.AddressLine2
+                    @ViewBag.Address.City
+                    @ViewBag.Address.State
+                    @ViewBag.Address.PinCode
+                    @ViewBag.Address.Country
+                    @ViewBag.Address.PhoneNo
+                </div>
+            </fieldset>
+        <div id="map_canvas"> </div>
+    </div>
+
+
+
+@section scripts{
+    <script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+    <script type="text/javascript">
+        $(function () {
+
+            if ($('#forVideo1').children('iframe').length > 0) {
+                $('#forVideo').addClass('show');
+            }
+            else {
+                $('#forVideo').addClass('hide');
+            }
+
+            var lat = "null";
+            var lon = "null";
+            var title = "kuch nahi";
+
+
+
+            $.getJSON('/Home/GetLonNLet', null, function (data) {
+                var latlon = data.split(',');
+                lat = parseFloat(latlon[0]);
+                lon = parseFloat(latlon[1]);
+                title = latlon[2];
+                initialize();
+            });
+
+            function initialize() {
+                var map_canvas = document.getElementById('map_canvas');
+                var map_options = {
+                    center: new google.maps.LatLng(lat, lon),
+                    zoom: 13,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                }
+                var map = new google.maps.Map(map_canvas, map_options)
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(lat, lon),
+                    map: map,
+                    title: title
+                });
+            }
+
+        });
+       
+       
+    </script>
+}
+
+
+
+
+ @*google.maps.event.addDomListener(window, 'load', initialize);*@

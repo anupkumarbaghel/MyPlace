@@ -1,0 +1,33 @@
+﻿@model IEnumerable<MyPlace.Web.Models.ProductVM>
+@{
+    ViewBag.MetaDescription = "e commerce of you business, Here your products are displayed ";
+    ViewBag.Title = "OnlineShoaping";
+}
+@ViewBag.TopMessage
+<div class="row">
+    <div class="col-sm-3">
+        <div class="list-group">
+            @foreach (var item in @ViewBag.Category)
+            {
+                <a class="list-group-item @item.Id" title="@item.Description" href="@ViewBag.DescId?val=@item.Id">@item.Title<span class="badge">@item.ProductCount</span></a>
+            }
+        </div>
+    </div>
+    <div class="col-sm-9">
+    @Html.Partial("_ProductView",Model)
+    </div>
+</div>
+
+
+
+
+<input type="hidden" id="activecat" value="@ViewBag.ActiveCat" />
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var active = $('#activecat').val();
+            $("." + active).addClass("active");
+            $("img").unveil();
+        });
+    </script>
+}

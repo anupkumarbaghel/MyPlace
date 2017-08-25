@@ -43,10 +43,10 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li >@Html.ActionLink("My Card", "Index", "ControlPanel")</li>
-                    <li >@Html.ActionLink("Published Notes", "Index", "PublishedNotes")</li>
+                    @*<li >@Html.ActionLink("Published Notes", "Index", "PublishedNotes")</li>
                     <li >@Html.ActionLink("My Note Book", "Index", "NoteBooks")</li>
                     <li><a href="https://rtccopy.com">Share File</a></li>  
-                    <li >@Html.ActionLink("Chat", "Index", "VideoChat")</li> 
+                    <li >@Html.ActionLink("Chat", "Index", "VideoChat")</li>*@ 
                 </ul>
                   
                 @Html.Partial("_LoginPartial")
@@ -61,7 +61,7 @@
         </footer>
     </div>
 
-    <div style="position:fixed;bottom:0px;right:0px">
+    @*<div style="position:fixed;bottom:0px;right:0px">
         
         <div class="list-group homeonlineuser">
             <a href="#" class="list-group-item active">
@@ -72,7 +72,7 @@
             </div>
         </div>
          
-    </div>
+    </div>*@
         @Scripts.Render("~/bundles/bootstrap")
         @*<script src="~/Scripts/jquery.unveil.js"></script>
     <script src="~/Scripts/jquery.signalR-2.0.2.js"></script>*@

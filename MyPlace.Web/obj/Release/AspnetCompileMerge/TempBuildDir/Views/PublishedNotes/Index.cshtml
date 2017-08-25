@@ -1,0 +1,42 @@
+﻿@model IEnumerable<MyPlace.Domain.NoteBook.PublishedNotes>
+
+@{
+    ViewBag.Title = "Publised Notes";
+}
+
+<div class="row">
+
+    <div class="col-sm-4">
+        <div class="list-group">
+            <a class="btn btn-default" href="#" style="width:100%">Published Notes</a>
+            @foreach (var item in Model)
+            {
+                if (@item.NotePublished.Id == @ViewBag.SelectedNote)
+                {
+                    <a class="btn list-group-item note active" data-val="@item.NotePublished.Id">@item.NotePublished.Title<br/><sub>By : @item.NotePublished.CreatedBy , On : @item.ModifiedOn.ToString("dd MMM yy")</sub></a>
+                }
+                else
+                {
+                    <a class="btn list-group-item note " data-val="@item.NotePublished.Id">@item.NotePublished.Title<br/><sub>By : @item.NotePublished.CreatedBy , On : @item.ModifiedOn.ToString("dd MMM yy") </sub></a>
+                }
+            }
+        </div>
+    </div>
+    <div class="col-sm-8">
+        <a class="btn btn-default notefinal" href="#" style="width:100%">@ViewBag.Heading</a>
+        @Html.Raw(@ViewBag.Content)
+    </div>
+</div>
+
+@section scripts{
+
+    <script>
+        (function () {
+            $(".note").click(function () {
+                window.location = "/PublishedNotes/Index" + "?selectedNote=" + $(this).attr("data-val");
+            });
+        }());
+    </script>
+
+}
+

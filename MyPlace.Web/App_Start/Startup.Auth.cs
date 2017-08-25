@@ -46,9 +46,9 @@ namespace MyPlace.Web
             //   consumerKey: "",
             //   consumerSecret: "");
 
-            app.UseFacebookAuthentication(
-               appId: "614094388711282",
-               appSecret: "a92e7b77e8e5f1c5ce337e270f5dacd7");
+            //app.UseFacebookAuthentication(
+            //   appId: "614094388711282",
+            //   appSecret: "a92e7b77e8e5f1c5ce337e270f5dacd7");
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {

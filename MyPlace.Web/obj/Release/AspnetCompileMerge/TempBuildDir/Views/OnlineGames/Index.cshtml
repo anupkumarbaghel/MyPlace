@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Online Games";
+}
+
+<h2>Chor Police</h2>
+<div class="row">
+    <div class="col-md-8">
+        <canvas id="canvasGame" width="600" height="400" style="border:solid 1px white"></canvas>
+    </div>
+    <div class="col-md-4">
+        <ul id="ulShowMessage">
+            <li>Chat Messages Shown Here</li>
+        </ul>
+        <input type="text" class="input-lg" placeholder="Write message " id="txtWriteMessage" />
+        <button id="btnSend">Send</button>
+    </div>
+</div>
+
+<h3>Use your arrow key or swipe to move</h3>
+<h4>One can be chor and one police and enjoy the game</h4>
+
+@section scripts{
+    <script src="~/Scripts/gamescript.js"></script>
+}
+
+
+
+
+

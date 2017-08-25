@@ -8,3 +8,7 @@ F:\New work\MyPlace\MyPlace.Domain\bin\Release\MyPlace.Domain.pdb
 F:\New work\MyPlace\MyPlace.Domain\obj\Release\MyPlace.Domain.csprojResolveAssemblyReference.cache
 F:\New work\MyPlace\MyPlace.Domain\obj\Release\MyPlace.Domain.dll
 F:\New work\MyPlace\MyPlace.Domain\obj\Release\MyPlace.Domain.pdb
+G:\BusinessEcard\MyPlace.Domain\bin\Release\MyPlace.Domain.dll
+G:\BusinessEcard\MyPlace.Domain\bin\Release\MyPlace.Domain.pdb
+G:\BusinessEcard\MyPlace.Domain\obj\Release\MyPlace.Domain.dll
+G:\BusinessEcard\MyPlace.Domain\obj\Release\MyPlace.Domain.pdb

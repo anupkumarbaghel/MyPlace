@@ -1,0 +1,31 @@
+﻿@model MyPlace.Domain.NoteBook.Note
+
+@{
+    ViewBag.Title = "Published Note";
+}
+<div class="jumbotron">
+  <div class="lead">
+      Your Note has been published. All the users who access this site can see your notes in published area.  Thankyou.
+  </div>  
+</div>
+ 
+<div>
+    @Html.ActionLink("Ok", "Index", null, new {@class="btn btn-primary" })
+</div>
+<hr/>
+<div>
+
+   
+         
+        
+         <h4>@Html.DisplayFor(model => model.Title)</h4>  
+       
+            
+       
+            @Html.Raw(Model.Content);
+       
+
+       
+
+       
+</div>

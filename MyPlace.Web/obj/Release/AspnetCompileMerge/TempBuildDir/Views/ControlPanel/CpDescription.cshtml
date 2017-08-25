@@ -1,0 +1,673 @@
+﻿@model MyPlace.Web.Models.CpHmDesc
+
+@{
+    ViewBag.Title = "Fill your Home Description";
+}
+
+    @using (Html.BeginForm(null, null, FormMethod.Post, new { role = "form" }))
+    {
+        @Html.AntiForgeryToken();
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.id)
+        <div class="well">
+            <h1>Describe Your Business</h1>
+            @if(ViewBag.Shoping)
+            {
+            @Html.TextBoxFor(model => model.ShopingNotification, new { @class = "input-lg", @placeholder = "Shoaping Notification" })
+            }
+        </div>
+        if (ViewBag.MaintainCard)
+        {
+            <div class="well">
+                @Html.ActionLink("Maintain your card", "Index", "Features", null, new { @class = "btn btn-info" })
+            </div>
+
+        }
+
+        @Html.TextBoxFor(model => model.MainHeader, new { @class = "input-lg", @placeholder = "Give Top Most Header" })
+
+
+         <div class="row">
+            <div class="col-sm-6">
+                <img src="@Model.HeaderImageUrl" id="MainImage" />
+                <div><a href="#" id="btnFrontImage">Upload Description Main Pic</a></div>
+                <input type="file" name="HmDescMainImage" id="input-front-image" style="visibility:hidden" />
+            </div>
+            <div class="col-sm-6">
+                <img src="@Model.HeaderImageUrl1" id="MainImage1" />
+                <div><a href="#" id="btnFrontImage1">Upload Description Main Pic</a></div>
+                <input type="file" name="HmDescMainImage1" id="input-front-image1" style="visibility:hidden" />
+            </div>
+        </div>    
+        
+        
+       
+
+        <div class="well">
+            <fieldset>
+                <legend>Any thing Which Shuts you</legend>
+                @Html.TextBoxFor(model => model.NotificationHeader, new { @class = "input-lg", @placeholder = "Notification Header" })
+                @Html.EditorFor(model => model.NotificationHeaderSub, new { @class = "input-sm", @placeholder = "Notification Header Description" })
+            </fieldset>
+        </div>
+
+
+        <div class="well">
+            <fieldset>
+                <legend>Optional</legend>
+                @Html.TextBoxFor(model => model.VideoUrl1, new { @class = "input-sm", @placeholder = "Go to YouTube.com > YourVideo > Share > Embed" })
+                @Html.TextBoxFor(model => model.VideoUrl2, new { @class = "input-sm", @placeholder = "It Gives you a text copy that here" })
+            </fieldset>
+        </div>
+
+        <h2>Fill as much as you like upto 10</h2><hr />
+        for (int i = 0; i < 10; i++)
+        {
+            <div class="row" style="margin-bottom:20px">
+                <div class="col-md-6">
+                    <div id="divImgContainer">
+                        <img src="@Model.imgdesc[i].ImageUrl" id="image@(i)" />
+                        <a href="#" class="btn btn-primary" id="btnImage@(i)">Upload</a>
+                        <input type="file" name="HmDescMainImage" id="inputImage@(i)" style="visibility:hidden" />
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    @Html.TextAreaFor(model => model.imgdesc[i].Content, new { style = "font-size:25px;width:100%;height:fill" })
+                </div>
+            </div>
+            <hr />
+        }
+      
+        <div class="row well"><button class="btn btn-default pull-right" style="width:200px" type="submit">Save</button></div>
+            
+     
+
+
+    }
+
+
+
+@section scripts{
+
+    <script type="text/javascript">
+        $(function () {
+            $('input[type=text]').addClass('form-control');
+
+
+            initAutoFileUpload();
+
+            $("#input-front-image").change(function () { $("#MainImage").attr("src", "/Content/Gifs/wolf.gif"); });
+
+            $("#btnFrontImage").click(function () {
+                $("#input-front-image").click();
+                return false;
+            });
+
+            function initAutoFileUpload() {
+                'use strict';
+
+                $('#input-front-image').fileupload({
+                    autoUpload: true,
+                    url: '/ControlPanel/UploadImageDescMain',
+                    dataType: 'json',
+                    add: function (e, data) {
+                        var jqXHR = data.submit()
+                            .success(function (data, textStatus, jqXHR) {
+                                $("#MainImage").attr("src", data);
+                            })
+                            .error(function (data, textStatus, errorThrown) {
+                                if (typeof (data) != 'undefined' || typeof (textStatus) != 'undefined' || typeof (errorThrown) != 'undefined') {
+                                    alert(textStatus + errorThrown + data);
+                                }
+                            });
+                    },
+                    fail: function (event, data) {
+                        if (data.files[0].error) {
+                            alert(data.files[0].error);
+                        }
+                    }
+                });
+            }
+
+
+        });
+    </script>
+
+<script type="text/javascript">
+    $(function () {
+       
+        initAutoFileUpload();
+
+        $("#input-front-image1").change(function () { $("#MainImage1").attr("src", "/Content/Gifs/wolf.gif"); });
+
+        $("#btnFrontImage1").click(function () {
+            $("#input-front-image1").click();
+            return false;
+        });
+
+        function initAutoFileUpload() {
+            'use strict';
+
+            $('#input-front-image1').fileupload({
+                autoUpload: true,
+                url: '/ControlPanel/UploadImageDescMain1',
+                dataType: 'json',
+                add: function (e, data) {
+                    var jqXHR = data.submit()
+                        .success(function (data, textStatus, jqXHR) {
+                            $("#MainImage1").attr("src", data);
+                        })
+                        .error(function (data, textStatus, errorThrown) {
+                            if (typeof (data) != 'undefined' || typeof (textStatus) != 'undefined' || typeof (errorThrown) != 'undefined') {
+                                alert(textStatus + errorThrown + data);
+                            }
+                        });
+                },
+                fail: function (event, data) {
+                    if (data.files[0].error) {
+                        alert(data.files[0].error);
+                    }
+                }
+            });
+        }
+
+
+    });
+</script>
+
+
+
+    <script type="text/javascript">
+        $(function () {
+            var i = "0";
+            var inputImagei = "inputImage" + i;
+            var imagei = "image" + i;
+            var btnImagei = "btnImage" + i;
+            var UploadCollImagei = "UploadCollImage" + i;
+            initAutoFileUpload();
+
+
+            $("#" + inputImagei).change(function () { $("#" + imagei).attr("src", "/Content/Gifs/wolf.gif"); });
+
+            $("#" + btnImagei).click(function () {
+                $("#" + inputImagei).click();
+                return false;
+            });
+
+            function initAutoFileUpload() {
+                'use strict';
+
+                $('#' + inputImagei).fileupload({
+                    autoUpload: true,
+                    url: '/ControlPanel/' + UploadCollImagei,
+                    dataType: 'json',
+                    add: function (e, data) {
+                        var jqXHR = data.submit()
+                            .success(function (data, textStatus, jqXHR) {
+
+                                $("#" + imagei).attr("src", data);
+                            })
+                            .error(function (data, textStatus, errorThrown) {
+                                if (typeof (data) != 'undefined' || typeof (textStatus) != 'undefined' || typeof (errorThrown) != 'undefined') {
+                                    alert(textStatus + errorThrown + data);
+                                }
+                            });
+                    },
+                    fail: function (event, data) {
+                        if (data.files[0].error) {
+                            alert(data.files[0].error);
+                        }
+                    }
+                });
+            }
+
+
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            var i = "1";
+            var inputImagei = "inputImage" + i;
+            var imagei = "image" + i;
+            var btnImagei = "btnImage" + i;
+            var UploadCollImagei = "UploadCollImage" + i;
+            initAutoFileUpload();
+
+
+            $("#" + inputImagei).change(function () { $("#" + imagei).attr("src", "/Content/Gifs/wolf.gif"); });
+
+            $("#" + btnImagei).click(function () {
+                $("#" + inputImagei).click();
+                return false;
+            });
+
+            function initAutoFileUpload() {
+                'use strict';
+
+                $('#' + inputImagei).fileupload({
+                    autoUpload: true,
+                    url: '/ControlPanel/' + UploadCollImagei,
+                    dataType: 'json',
+                    add: function (e, data) {
+                        var jqXHR = data.submit()
+                            .success(function (data, textStatus, jqXHR) {
+
+                                $("#" + imagei).attr("src", data);
+                            })
+                            .error(function (data, textStatus, errorThrown) {
+                                if (typeof (data) != 'undefined' || typeof (textStatus) != 'undefined' || typeof (errorThrown) != 'undefined') {
+                                    alert(textStatus + errorThrown + data);
+                                }
+                            });
+                    },
+                    fail: function (event, data) {
+                        if (data.files[0].error) {
+                            alert(data.files[0].error);
+                        }
+                    }
+                });
+            }
+
+
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            var i = "2";
+            var inputImagei = "inputImage" + i;
+            var imagei = "image" + i;
+            var btnImagei = "btnImage" + i;
+            var UploadCollImagei = "UploadCollImage" + i;
+            initAutoFileUpload();
+
+
+            $("#" + inputImagei).change(function () { $("#" + imagei).attr("src", "/Content/Gifs/wolf.gif"); });
+
+            $("#" + btnImagei).click(function () {
+                $("#" + inputImagei).click();
+                return false;
+            });
+
+            function initAutoFileUpload() {
+                'use strict';
+
+                $('#' + inputImagei).fileupload({
+                    autoUpload: true,
+                    url: '/ControlPanel/' + UploadCollImagei,
+                    dataType: 'json',
+                    add: function (e, data) {
+                        var jqXHR = data.submit()
+                            .success(function (data, textStatus, jqXHR) {
+
+                                $("#" + imagei).attr("src", data);
+                            })
+                            .error(function (data, textStatus, errorThrown) {
+                                if (typeof (data) != 'undefined' || typeof (textStatus) != 'undefined' || typeof (errorThrown) != 'undefined') {
+                                    alert(textStatus + errorThrown + data);
+                                }
+                            });
+                    },
+                    fail: function (event, data) {
+                        if (data.files[0].error) {
+                            alert(data.files[0].error);
+                        }
+                    }
+                });
+            }
+
+
+        });
+    </script>
+
+
+
+    <script type="text/javascript">
+        $(function () {
+            var i = "3";
+            var inputImagei = "inputImage" + i;
+            var imagei = "image" + i;
+            var btnImagei = "btnImage" + i;
+            var UploadCollImagei = "UploadCollImage" + i;
+            initAutoFileUpload();
+
+
+            $("#" + inputImagei).change(function () { $("#" + imagei).attr("src", "/Content/Gifs/wolf.gif"); });
+
+            $("#" + btnImagei).click(function () {
+                $("#" + inputImagei).click();
+                return false;
+            });
+
+            function initAutoFileUpload() {
+                'use strict';
+
+                $('#' + inputImagei).fileupload({
+                    autoUpload: true,
+                    url: '/ControlPanel/' + UploadCollImagei,
+                    dataType: 'json',
+                    add: function (e, data) {
+                        var jqXHR = data.submit()
+                            .success(function (data, textStatus, jqXHR) {
+
+                                $("#" + imagei).attr("src", data);
+                            })
+                            .error(function (data, textStatus, errorThrown) {
+                                if (typeof (data) != 'undefined' || typeof (textStatus) != 'undefined' || typeof (errorThrown) != 'undefined') {
+                                    alert(textStatus + errorThrown + data);
+                                }
+                            });
+                    },
+                    fail: function (event, data) {
+                        if (data.files[0].error) {
+                            alert(data.files[0].error);
+                        }
+                    }
+                });
+            }
+
+
+        });
+    </script>
+
+
+
+    <script type="text/javascript">
+        $(function () {
+            var i = "4";
+            var inputImagei = "inputImage" + i;
+            var imagei = "image" + i;
+            var btnImagei = "btnImage" + i;
+            var UploadCollImagei = "UploadCollImage" + i;
+            initAutoFileUpload();
+
+
+            $("#" + inputImagei).change(function () { $("#" + imagei).attr("src", "/Content/Gifs/wolf.gif"); });
+
+            $("#" + btnImagei).click(function () {
+                $("#" + inputImagei).click();
+                return false;
+            });
+
+            function initAutoFileUpload() {
+                'use strict';
+
+                $('#' + inputImagei).fileupload({
+                    autoUpload: true,
+                    url: '/ControlPanel/' + UploadCollImagei,
+                    dataType: 'json',
+                    add: function (e, data) {
+                        var jqXHR = data.submit()
+                            .success(function (data, textStatus, jqXHR) {
+
+                                $("#" + imagei).attr("src", data);
+                            })
+                            .error(function (data, textStatus, errorThrown) {
+                                if (typeof (data) != 'undefined' || typeof (textStatus) != 'undefined' || typeof (errorThrown) != 'undefined') {
+                                    alert(textStatus + errorThrown + data);
+                                }
+                            });
+                    },
+                    fail: function (event, data) {
+                        if (data.files[0].error) {
+                            alert(data.files[0].error);
+                        }
+                    }
+                });
+            }
+
+
+        });
+    </script>
+
+
+
+    <script type="text/javascript">
+        $(function () {
+            var i = "5";
+            var inputImagei = "inputImage" + i;
+            var imagei = "image" + i;
+            var btnImagei = "btnImage" + i;
+            var UploadCollImagei = "UploadCollImage" + i;
+            initAutoFileUpload();
+
+
+            $("#" + inputImagei).change(function () { $("#" + imagei).attr("src", "/Content/Gifs/wolf.gif"); });
+
+            $("#" + btnImagei).click(function () {
+                $("#" + inputImagei).click();
+                return false;
+            });
+
+            function initAutoFileUpload() {
+                'use strict';
+
+                $('#' + inputImagei).fileupload({
+                    autoUpload: true,
+                    url: '/ControlPanel/' + UploadCollImagei,
+                    dataType: 'json',
+                    add: function (e, data) {
+                        var jqXHR = data.submit()
+                            .success(function (data, textStatus, jqXHR) {
+
+                                $("#" + imagei).attr("src", data);
+                            })
+                            .error(function (data, textStatus, errorThrown) {
+                                if (typeof (data) != 'undefined' || typeof (textStatus) != 'undefined' || typeof (errorThrown) != 'undefined') {
+                                    alert(textStatus + errorThrown + data);
+                                }
+                            });
+                    },
+                    fail: function (event, data) {
+                        if (data.files[0].error) {
+                            alert(data.files[0].error);
+                        }
+                    }
+                });
+            }
+
+
+        });
+    </script>
+
+
+
+    <script type="text/javascript">
+        $(function () {
+            var i = "6";
+            var inputImagei = "inputImage" + i;
+            var imagei = "image" + i;
+            var btnImagei = "btnImage" + i;
+            var UploadCollImagei = "UploadCollImage" + i;
+            initAutoFileUpload();
+
+
+            $("#" + inputImagei).change(function () { $("#" + imagei).attr("src", "/Content/Gifs/wolf.gif"); });
+
+            $("#" + btnImagei).click(function () {
+                $("#" + inputImagei).click();
+                return false;
+            });
+
+            function initAutoFileUpload() {
+                'use strict';
+
+                $('#' + inputImagei).fileupload({
+                    autoUpload: true,
+                    url: '/ControlPanel/' + UploadCollImagei,
+                    dataType: 'json',
+                    add: function (e, data) {
+                        var jqXHR = data.submit()
+                            .success(function (data, textStatus, jqXHR) {
+
+                                $("#" + imagei).attr("src", data);
+                            })
+                            .error(function (data, textStatus, errorThrown) {
+                                if (typeof (data) != 'undefined' || typeof (textStatus) != 'undefined' || typeof (errorThrown) != 'undefined') {
+                                    alert(textStatus + errorThrown + data);
+                                }
+                            });
+                    },
+                    fail: function (event, data) {
+                        if (data.files[0].error) {
+                            alert(data.files[0].error);
+                        }
+                    }
+                });
+            }
+
+
+        });
+    </script>
+
+
+
+    <script type="text/javascript">
+        $(function () {
+            var i = "7";
+            var inputImagei = "inputImage" + i;
+            var imagei = "image" + i;
+            var btnImagei = "btnImage" + i;
+            var UploadCollImagei = "UploadCollImage" + i;
+            initAutoFileUpload();
+
+
+            $("#" + inputImagei).change(function () { $("#" + imagei).attr("src", "/Content/Gifs/wolf.gif"); });
+
+            $("#" + btnImagei).click(function () {
+                $("#" + inputImagei).click();
+                return false;
+            });
+
+            function initAutoFileUpload() {
+                'use strict';
+
+                $('#' + inputImagei).fileupload({
+                    autoUpload: true,
+                    url: '/ControlPanel/' + UploadCollImagei,
+                    dataType: 'json',
+                    add: function (e, data) {
+                        var jqXHR = data.submit()
+                            .success(function (data, textStatus, jqXHR) {
+
+                                $("#" + imagei).attr("src", data);
+                            })
+                            .error(function (data, textStatus, errorThrown) {
+                                if (typeof (data) != 'undefined' || typeof (textStatus) != 'undefined' || typeof (errorThrown) != 'undefined') {
+                                    alert(textStatus + errorThrown + data);
+                                }
+                            });
+                    },
+                    fail: function (event, data) {
+                        if (data.files[0].error) {
+                            alert(data.files[0].error);
+                        }
+                    }
+                });
+            }
+
+
+        });
+    </script>
+
+
+
+    <script type="text/javascript">
+        $(function () {
+            var i = "8";
+            var inputImagei = "inputImage" + i;
+            var imagei = "image" + i;
+            var btnImagei = "btnImage" + i;
+            var UploadCollImagei = "UploadCollImage" + i;
+            initAutoFileUpload();
+
+
+            $("#" + inputImagei).change(function () { $("#" + imagei).attr("src", "/Content/Gifs/wolf.gif"); });
+
+            $("#" + btnImagei).click(function () {
+                $("#" + inputImagei).click();
+                return false;
+            });
+
+            function initAutoFileUpload() {
+                'use strict';
+
+                $('#' + inputImagei).fileupload({
+                    autoUpload: true,
+                    url: '/ControlPanel/' + UploadCollImagei,
+                    dataType: 'json',
+                    add: function (e, data) {
+                        var jqXHR = data.submit()
+                            .success(function (data, textStatus, jqXHR) {
+
+                                $("#" + imagei).attr("src", data);
+                            })
+                            .error(function (data, textStatus, errorThrown) {
+                                if (typeof (data) != 'undefined' || typeof (textStatus) != 'undefined' || typeof (errorThrown) != 'undefined') {
+                                    alert(textStatus + errorThrown + data);
+                                }
+                            });
+                    },
+                    fail: function (event, data) {
+                        if (data.files[0].error) {
+                            alert(data.files[0].error);
+                        }
+                    }
+                });
+            }
+
+
+        });
+    </script>
+
+
+
+    <script type="text/javascript">
+        $(function () {
+            var i = "9";
+            var inputImagei = "inputImage" + i;
+            var imagei = "image" + i;
+            var btnImagei = "btnImage" + i;
+            var UploadCollImagei = "UploadCollImage" + i;
+            initAutoFileUpload();
+
+
+            $("#" + inputImagei).change(function () { $("#" + imagei).attr("src", "/Content/Gifs/wolf.gif"); });
+
+            $("#" + btnImagei).click(function () {
+                $("#" + inputImagei).click();
+                return false;
+            });
+
+            function initAutoFileUpload() {
+                'use strict';
+
+                $('#' + inputImagei).fileupload({
+                    autoUpload: true,
+                    url: '/ControlPanel/' + UploadCollImagei,
+                    dataType: 'json',
+                    add: function (e, data) {
+                        var jqXHR = data.submit()
+                            .success(function (data, textStatus, jqXHR) {
+
+                                $("#" + imagei).attr("src", data);
+                            })
+                            .error(function (data, textStatus, errorThrown) {
+                                if (typeof (data) != 'undefined' || typeof (textStatus) != 'undefined' || typeof (errorThrown) != 'undefined') {
+                                    alert(textStatus + errorThrown + data);
+                                }
+                            });
+                    },
+                    fail: function (event, data) {
+                        if (data.files[0].error) {
+                            alert(data.files[0].error);
+                        }
+                    }
+                });
+            }
+
+
+        });
+    </script>
+}
